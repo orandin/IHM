@@ -18,5 +18,8 @@
   "bugs": {
     "url": "https://github.com/orandin/IHM/issues"
   },
-  "homepage": "https://github.com/orandin/IHM#readme"
+  "homepage": "https://github.com/orandin/IHM#readme",
+  "dependencies": {
+    "artyom.js": "^1.0.5"
+  }
 }
