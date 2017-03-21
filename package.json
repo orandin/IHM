@@ -1,0 +1,22 @@
+{
+  "name": "jarbis",
+  "version": "1.0.0",
+  "description": "car assistant",
+  "main": "js/main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/orandin/IHM.git"
+  },
+  "keywords": [
+    "car"
+  ],
+  "author": "ihm-grp1",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/orandin/IHM/issues"
+  },
+  "homepage": "https://github.com/orandin/IHM#readme"
+}
