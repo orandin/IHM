@@ -1,0 +1,99 @@
+/* -------------------------
+
+General styles
+
+-------------------------- */
+html, body{
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+
+.state-jarbis {
+    font-size: 24px;
+}
+
+/* -------------------------
+
+Car styles
+
+-------------------------- */
+.bkgd-car{
+    width: 1000px;
+    height: 700px;
+    background-image: url(../assets/img/car.jpg);
+    background-size: cover;
+    position: relative;
+}
+
+.windshield{
+    position: absolute;
+    top: 16px;
+    left: 41px;
+    border-top: 160px solid transparent;
+    border-left: 89px solid transparent;
+    border-right: 24px solid transparent;
+    height: 0;
+    width: 264px;
+    cursor: pointer;
+}
+.windshield:hover, .windshield.active{
+    border-top-color: rgba(162, 162, 162, 0.3);
+}
+
+.car-element {
+    position: absolute;
+    border: 3px solid transparent;
+    cursor: pointer;
+}
+
+.car-element:hover {
+    border-color: red;
+}
+
+.wheel {
+    width: 120px;
+    height: 42px;
+    border-radius: 50%;
+}
+
+.wheel-left-top{
+    top: 208px;
+    left: 100px;
+    transform: rotate(140deg);
+}
+
+.wheel-left-bottom{
+    top: 395px;
+    left: 79px;
+    transform: rotate(229deg);
+}
+
+.wheel-right-top{
+    top: 208px;
+    left: 268px;
+    transform: rotate(41deg);
+}
+
+.wheel-right-bottom{
+    top: 395px;
+    left: 269px;
+    transform: rotate(313deg);
+}
+
+.klaxon {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    top: 282px;
+    left: 179px;
+}
+
+.gear-lever{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    top: 425px;
+    left: 496px;
+}

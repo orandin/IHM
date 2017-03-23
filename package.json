@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/orandin/IHM#readme",
   "dependencies": {
-    "artyom.js": "^1.0.5"
+    "artyom.js": "^1.0.5",
+    "jquery": "^3.2.1"
   }
 }
