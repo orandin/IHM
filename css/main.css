@@ -7,8 +7,41 @@ html, body{
     margin: 0;
     padding: 0;
     height: 100%;
+    background-color: #000;
+
 }
 
+/* -------------------------
+
+ background-image
+
+-------------------------- */
+
+.background-image {
+  position: fixed;
+  left: 0;
+  right: 0;
+   display: block;
+  background-image: url(../assets/img/car.jpg);
+  background-size: cover;
+  filter : blur(30px);
+  width: 100%;
+  height: 100%;
+}
+
+/* -------------------------
+
+  controls
+
+-------------------------- */
+
+.controls {
+  text-align: center;
+  color: #FFF;
+  position: relative;
+  z-index: 1;
+  margin: 15px auto 20px;
+}
 
 .state-jarbis {
     font-size: 24px;
@@ -20,11 +53,14 @@ Car styles
 
 -------------------------- */
 .bkgd-car{
+    margin:auto;
     width: 1000px;
     height: 700px;
     background-image: url(../assets/img/car.jpg);
     background-size: cover;
     position: relative;
+    border: 1px solid black;
+    box-shadow: 0 0 55px black;
 }
 
 .windshield{
