@@ -26,13 +26,20 @@ $(document).ready(function (){
         //Après 5 secondes, délenchement d'un premier événement.
         setTimeout(function(){
             artyom.say("Attention ! J'ai détecté un niveau de fatigue élevé, vous devriez songer à vous arrêter pour vous reposer.");
+            $('.bkgd-car').addClass('wiggle');
             step++;
         }, 5000);
 
+        setTimeout(function(){
+            $('.bkgd-car').removeClass('wiggle');
+        }, 7000);
+
         //Après 20 secondes, déclenchement d'un second événement
         setTimeout(function(){
+
             if(step === 1){
-                artyom.say("Attention ! Vous avez choisi de ne pas vous arrêter, vous mettez votre vie en danger. Voulez-vous que je vous dirige vers une aire de repos?");
+                artyom.say("Attention ! Vous avez choisi de ne pas vous arrêter et les signes de fatigue s'agravent. Vous mettez votre vie en danger. Voulez-vous que je vous dirige vers une aire de repos?");
+                $('.bkgd-car').addClass('wiggle');
                 step++;
             }
 
