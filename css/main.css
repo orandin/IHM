@@ -47,6 +47,10 @@ html, body{
     font-size: 24px;
 }
 
+.currentScenario {
+    font-size: 24px;
+}
+
 /* -------------------------
 
 Car styles
@@ -132,4 +136,14 @@ Car styles
     border-radius: 50%;
     top: 425px;
     left: 496px;
+}
+
+/* -------------------------
+
+Car styles
+
+-------------------------- */
+.scenarios{
+    margin: 3em;
+    position: absolute;
 }

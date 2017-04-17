@@ -1,6 +1,11 @@
 $(document).ready(function (){
 
+    /**
+        COMMON;
+    */
     var listenJarbis = true;
+    var currentScenario = 'Aucun scénario actif';
+    var step = 0;
 
     $('.toggleJarbis').click(function(){
         listenJarbis = !listenJarbis;
@@ -8,6 +13,98 @@ $(document).ready(function (){
         listenJarbis ? startJarbis() : stopJarbis();
     });
 
+    /**
+        SCENARIO FATIGUE;
+    */
+    var SCENARIO_FATIGUE = 'FATIGUE';
+
+    $('.scenario-fatigue').click(function(){
+        changeScenario(SCENARIO_FATIGUE);
+        console.log('Début du scénario fatigue');
+        $('.windshield').removeClass('active');
+        step = 0;
+        //Après 5 secondes, délenchement d'un premier événement.
+        setTimeout(function(){
+            artyom.say("Attention ! J'ai détecté un niveau de fatigue élevé, vous devriez songer à vous arrêter pour vous reposer.");
+            step++;
+        }, 5000);
+
+        //Après 20 secondes, déclenchement d'un second événement
+        setTimeout(function(){
+            if(step === 1){
+                artyom.say("Attention ! Vous avez choisi de ne pas vous arrêter, vous mettez votre vie en danger. Voulez-vous que je vous dirige vers une aire de repos?");
+                step++;
+            }
+
+            var commandeArret = {
+                indexes:["Oui", "Ouais", "Non", "Plus tard"],
+                action:function(i){
+                    if(step === 2){
+                        switch (i) {
+                            case 0: case 1:
+                                artyom.say("Recherche en cours ...");
+                                artyom.say("Vous trouverez une aire de repos à 850m. Voulez-vous passer en pilote automatique ?");
+                                $('.windshield').addClass('active');
+                                step = 4;
+                                break;
+                            default:
+                                artyom.say("Très bien, en revanche lors du prochain avertissement, je passerai en pilote automatique");
+                                step = 3;
+                                fatigue_piloteAutoForce();
+                                break;
+                        }
+
+                    }
+                }
+            }
+
+            artyom.addCommands(commandeArret);
+        }, 20000);
+    });
+
+    $('.wheel-left-top').click(function(){
+        fatigue_refus();
+    });
+    $('.wheel-left-bottom').click(function(){
+        fatigue_refus();
+    });
+    $('.wheel-right-top').click(function(){
+        fatigue_validation();
+    });
+    $('.wheel-right-bottom').click(function(){
+        fatigue_validation();
+    });
+
+    function fatigue_refus(){
+        if(currentScenario === SCENARIO_FATIGUE && step === 4){
+            console.log('refus');
+            step = -1;
+            fatigue_piloteAutoForce();
+        }
+    }
+
+    function fatigue_piloteAutoForce(){
+        setTimeout(function(){
+            artyom.say("Attention ! Par précaution, passage en mode pilote automatique. Arrêt du véhicule programmé à l'aire de repos la plus proche.");
+            console.log('fin du scénario de fatigue');
+            changeScenario();
+        }, 5000);
+    }
+
+    function fatigue_validation(){
+        if(currentScenario === SCENARIO_FATIGUE && step === 4){
+            console.log('validation');
+            step = -1;
+            artyom.say("Passage en mode pilote automatique. Vous arriverez à destination dans 2 minutes.");
+            console.log('fin du scénario de fatigue');
+            changeScenario();
+        }
+    }
+
+
+    /**
+        SCENARIO ET COMMANDES PAR DEFAUTS;
+    */
     var commands = [
         {
             indexes:["Bonjour", "Salut"],
@@ -64,8 +161,6 @@ $(document).ready(function (){
     }
 
 
-
-
     /* ----------------------------------
 
     Functions
@@ -74,4 +169,13 @@ $(document).ready(function (){
     $('.wheel').click(function(){
         console.log('click on the wheel');
     });
+
+    function changeScenario(newScenario){
+        if(newScenario){
+            currentScenario = newScenario;
+            $('.currentScenario').text('Scénario : ' + currentScenario);
+        } else {
+            $('.currentScenario').text('Aucun scénario actif');
+        }
+    }
 });
