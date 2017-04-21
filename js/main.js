@@ -107,6 +107,78 @@ $(document).ready(function (){
             changeScenario();
         }
     }
+	
+	/**
+        SCENARIO EMBOUTEILLAGE;
+    */
+    var SCENARIO_EMBOUTEILLAGE = 'EMBOUTEILLAGE';
+
+    $('.scenario-embouteillage').click(function(){
+		changeScenario(SCENARIO_EMBOUTEILLAGE);
+        console.log('Début du scénario prévention embouteillage');
+        $('.windshield').removeClass('active');
+        step = 0;
+        //Après 5 secondes, délenchement d'un premier événement.
+		setTimeout(function(){
+            artyom.say("Voulez-vous que je recherche un trajet alternatif ?");
+            $('.bkgd-car').addClass('wiggle');
+			
+			var commande = {
+                indexes:["Oui", "Ouais", "Non", "Plus tard", "Pas tout de suite"],
+                action:function(i){
+                    switch (i) {
+                        case 0: case 1:
+                            artyom.say("Recherche en cours ...");
+                            artyom.say("J'ai trouvé une route alternative");
+							artyom.say("Je vous l'affiche tout de suite");
+							artyom.say("Vous arriverez à destination dans 17 minutes");
+                            $('.windshield').addClass('active');
+                            step = 1;
+                            break;
+                        default:
+                            artyom.say("Très bien. Je vous souhaite alors une bonne route et un bon courage.");
+                            step = 2;
+                            break;
+                    }
+                }
+            }
+			
+            artyom.addCommands(commande);
+        }, 5000);
+		
+		setTimeout(function(){
+            $('.bkgd-car').removeClass('wiggle');
+        }, 7000);
+	});
+	
+	$('.wheel-left-top').click(function(){
+        embouteillage_refus();
+    });
+    $('.wheel-right-top').click(function(){
+        embouteillage_validation();
+    });
+
+    function embouteillage_refus(){
+        if(currentScenario === SCENARIO_EMBOUTEILLAGE && step === 0){
+            console.log('refus trajet alternatif');
+            step = -1;
+			artyom.say("Très bien. Je vous souhaite alors une bonne route et un bon courage.");
+        }
+    }
+
+    function embouteillage_validation(){
+        if(currentScenario === SCENARIO_EMBOUTEILLAGE && step === 0){
+            console.log('validation trajet alternatif');
+            step = -1;
+            artyom.say("Recherche en cours ...");
+            artyom.say("J'ai trouvé une route alternative");
+			artyom.say("Je vous l'affiche tout de suite");
+			artyom.say("Vous arriverez à destination dans 17 minutes");
+            $('.windshield').addClass('active');
+            console.log('fin du scénario de prévention des embouteillages');
+            changeScenario();
+        }
+    }
 
 
     /**
