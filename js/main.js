@@ -205,7 +205,8 @@ $(document).ready(function (){
         step = 0;
         //Après 5 secondes, délenchement d'un premier événement.
 		setTimeout(function(){
-            artyom.say("Voulez-vous que je recherche un trajet alternatif ?");
+            artyom.say("Un embouteillage a été détecté sur votre itinéraire.");
+			artyom.say("Souhaitez-vous que je recherche un trajet alternatif ?");
             $('.bkgd-car').addClass('wiggle');
 			
 			var commande = {
@@ -213,16 +214,25 @@ $(document).ready(function (){
                 action:function(i){
                     switch (i) {
                         case 0: case 1:
-                            artyom.say("Recherche en cours ...");
-                            artyom.say("J'ai trouvé une route alternative");
-							artyom.say("Je vous l'affiche tout de suite");
-							artyom.say("Vous arriverez à destination dans 17 minutes");
-                            $('.windshield').addClass('active');
-                            step = 1;
+							if(step === 0) {
+								artyom.say("Recherche en cours ...");
+								artyom.say("J'ai trouvé un trajet alternatif. Celui ci vous fait gagner 10 minutes.");
+								artyom.say("Souhaitez-vous suivre cet itinéraire ?");
+								step = -1;
+							} else {
+								artyom.say("Confirmation");
+								$('.windshield').addClass('active');
+								artyom.say("Suivez les indications sur le pare-brise.");
+								console.log('fin du scénario de prévention des embouteillages');
+								changeScenario();
+							}
+							step = 1;
                             break;
                         default:
                             artyom.say("Très bien. Je vous souhaite alors une bonne route et un bon courage.");
                             step = 2;
+							console.log('fin du scénario de prévention des embouteillages');
+							changeScenario();
                             break;
                     }
                 }
@@ -248,6 +258,8 @@ $(document).ready(function (){
             console.log('refus trajet alternatif');
             step = -1;
 			artyom.say("Très bien. Je vous souhaite alors une bonne route et un bon courage.");
+			console.log('fin du scénario de prévention des embouteillages');
+            changeScenario();
         }
     }
 
