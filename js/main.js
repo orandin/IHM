@@ -276,6 +276,57 @@ $(document).ready(function (){
             changeScenario();
         }
     }
+	
+	/**
+        SCENARIO PARKING;
+    */
+    var SCENARIO_PARKING = 'PARKING';
+	
+	$('.scenario-parking').click(function(){
+		changeScenario(SCENARIO_PARKING);
+        console.log('Début du scénario recherche parking');
+        $('.windshield').removeClass('active');
+        step = 0;
+        //Après 5 secondes, délenchement d'un premier événement.
+		setTimeout(function(){
+            artyom.say("Bonjour Tony. Que puis-je faire pour vous en cette belle journée ?");
+            $('.bkgd-car').addClass('wiggle');
+			
+			var commande = {
+                indexes:["Recherche parking gratuit", "Oui", "Ouais", "Non", "Non merci", "Non merci Jarbis", "Ce sera tout", "Ce sera tout Jarbis", "Pas pour l'instant", "Pas pour le moment"],
+                action:function(i){
+                    switch (i) {
+                        case 0:
+							artyom.say("Recherche du parking gratuit le plus proche en cours.");
+							artyom.say("J'ai bien peur qu'il n'y ait pas de parking dans le coin.");
+							artyom.say("Cependant, il y a une place libre dans une rue proche d'ici.");
+							artyom.say("Voulez-vous que je vous y amène ?");
+							break;
+						case 1: case 2:
+							artyom.say("Dans ce cas, prenez la première à droite.");
+							artyom.say("Il y aura une place libre devant le marchand de fruits et légumes.")
+							artyom.say("Souhaitez-vous autre chose Tony ?");
+							break;
+                        default:
+							artyom.say("Alors bonne journée Tony.");
+							artyom.say("Et n'oubliez pas de sauver le monde.");
+							console.log('fin du scénario de recherche de parking');
+							changeScenario();
+                            break;
+                    }
+                }
+            }
+			
+            artyom.addCommands(commande);
+			
+
+        }, 5000);
+		
+		setTimeout(function(){
+            $('.bkgd-car').removeClass('wiggle');
+        }, 7000);
+		
+	});
 
 
     /**
