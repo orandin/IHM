@@ -109,6 +109,91 @@ $(document).ready(function (){
     }
 	
 	/**
+        SCENARIO ESSENCE;
+    */
+    var SCENARIO_ESSENCE = 'ESSENCE';
+	
+	$('.scenario-essence').click(function(){
+        changeScenario(SCENARIO_ESSENCE);
+        console.log('Début du scénario essence');
+        $('.windshield').removeClass('active');
+        step = 0;
+        //Après 5 secondes, délenchement d'un premier événement.
+        setTimeout(function(){
+            artyom.say("Votre jauge d'essence est actuellement très basse.");
+			artyom.say("Tapotez sur la gauche de votre volant pour continuer votre trajet.");
+			artyom.say("Tapotez sur la droite de votre volant pour que je vous guide jusqu'à la station la plus proche.");
+            $('.bkgd-car').addClass('wiggle');
+        }, 5000);
+
+        setTimeout(function(){
+            $('.bkgd-car').removeClass('wiggle');
+        }, 7000);
+        
+    });
+	
+	$('.wheel-left-top').click(function(){
+		if(step === 0) {
+			essence_refus();
+		}
+		if(step === 1) {
+			esso_validation();
+		}
+    });
+	
+	$('.wheel-right-top').click(function(){
+		if(step === 1) {
+			total_validation();
+		}
+		if(step === 0) {
+			essence_validation();
+		}
+    });
+	
+	function essence_refus(){
+        if(currentScenario === SCENARIO_ESSENCE && step === 0){
+            console.log('refus');
+            step = -1;
+            artyom.say("Faites attention, il ne vous reste que 10 kilomètres à parcourir avant de tomber en panne.");
+			console.log('fin du scénario de fatigue');
+            changeScenario();
+        }
+    }
+	
+	function essence_validation(){
+        if(currentScenario === SCENARIO_ESSENCE && step === 0){
+            console.log('validation');
+            step = 1;
+            artyom.say("J'ai trouvé deux stations à proximité.");
+			artyom.say("Tapotez sur la gauche du volant pour que je vous mène à la station Esso, un peu plus éloignée mais beaucoup moins fréquentée.");
+			artyom.say("Tapotez sur la droite du volant pour que je vous mène à la station Total; beaucoup plus fréquentée.");
+			artyom.say("Le temps d'attente peut être supérieur à 10 minutes.");
+        }
+    }
+	
+	function esso_validation() {
+		if(currentScenario === SCENARIO_ESSENCE && step === 1){
+			console.log('validation_esso');
+            step = -1;
+			artyom.say("Confirmation de la validation de la station Esso.");
+			artyom.say("Continuez tout droit. La station se trouve à deux kilomètres.");
+			console.log('fin du scénario essence');
+            changeScenario();
+		}
+	}
+	
+	function total_validation() {
+		if(currentScenario === SCENARIO_ESSENCE && step === 1){
+			console.log('validation_esso');
+            step = -1;
+			artyom.say("Confirmation de la validation de la station Total.");
+			artyom.say("Prenez la prochaine à droite. La station se trouve à 500 mètres.");
+			console.log('fin du scénario essence');
+            changeScenario();
+		}
+	}
+	
+	/**
         SCENARIO EMBOUTEILLAGE;
     */
     var SCENARIO_EMBOUTEILLAGE = 'EMBOUTEILLAGE';
