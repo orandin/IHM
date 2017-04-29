@@ -107,12 +107,12 @@ $(document).ready(function (){
             changeScenario();
         }
     }
-	
+
 	/**
         SCENARIO ESSENCE;
     */
     var SCENARIO_ESSENCE = 'ESSENCE';
-	
+
 	$('.scenario-essence').click(function(){
         changeScenario(SCENARIO_ESSENCE);
         console.log('Début du scénario essence');
@@ -129,9 +129,9 @@ $(document).ready(function (){
         setTimeout(function(){
             $('.bkgd-car').removeClass('wiggle');
         }, 7000);
-        
+
     });
-	
+
 	$('.wheel-left-top').click(function(){
 		if(step === 0) {
 			essence_refus();
@@ -140,7 +140,7 @@ $(document).ready(function (){
 			esso_validation();
 		}
     });
-	
+
 	$('.wheel-right-top').click(function(){
 		if(step === 1) {
 			total_validation();
@@ -149,7 +149,7 @@ $(document).ready(function (){
 			essence_validation();
 		}
     });
-	
+
 	function essence_refus(){
         if(currentScenario === SCENARIO_ESSENCE && step === 0){
             console.log('refus');
@@ -159,7 +159,7 @@ $(document).ready(function (){
             changeScenario();
         }
     }
-	
+
 	function essence_validation(){
         if(currentScenario === SCENARIO_ESSENCE && step === 0){
             console.log('validation');
@@ -170,7 +170,7 @@ $(document).ready(function (){
 			artyom.say("Le temps d'attente peut être supérieur à 10 minutes.");
         }
     }
-	
+
 	function esso_validation() {
 		if(currentScenario === SCENARIO_ESSENCE && step === 1){
 			console.log('validation_esso');
@@ -181,7 +181,7 @@ $(document).ready(function (){
             changeScenario();
 		}
 	}
-	
+
 	function total_validation() {
 		if(currentScenario === SCENARIO_ESSENCE && step === 1){
 			console.log('validation_esso');
@@ -192,7 +192,7 @@ $(document).ready(function (){
             changeScenario();
 		}
 	}
-	
+
 	/**
         SCENARIO EMBOUTEILLAGE;
     */
@@ -208,7 +208,7 @@ $(document).ready(function (){
             artyom.say("Un embouteillage a été détecté sur votre itinéraire.");
 			artyom.say("Souhaitez-vous que je recherche un trajet alternatif ?");
             $('.bkgd-car').addClass('wiggle');
-			
+
 			var commande = {
                 indexes:["Oui", "Ouais", "Non", "Plus tard", "Pas tout de suite"],
                 action:function(i){
@@ -237,15 +237,15 @@ $(document).ready(function (){
                     }
                 }
             }
-			
+
             artyom.addCommands(commande);
         }, 5000);
-		
+
 		setTimeout(function(){
             $('.bkgd-car').removeClass('wiggle');
         }, 7000);
 	});
-	
+
 	$('.wheel-left-top').click(function(){
         embouteillage_refus();
     });
@@ -276,12 +276,12 @@ $(document).ready(function (){
             changeScenario();
         }
     }
-	
+
 	/**
         SCENARIO PARKING;
     */
     var SCENARIO_PARKING = 'PARKING';
-	
+
 	$('.scenario-parking').click(function(){
 		changeScenario(SCENARIO_PARKING);
         console.log('Début du scénario recherche parking');
@@ -291,7 +291,7 @@ $(document).ready(function (){
 		setTimeout(function(){
             artyom.say("Bonjour Tony. Que puis-je faire pour vous en cette belle journée ?");
             $('.bkgd-car').addClass('wiggle');
-			
+
 			var commande = {
                 indexes:["Recherche parking gratuit", "Oui", "Ouais", "Non", "Non merci", "Non merci Jarbis", "Ce sera tout", "Ce sera tout Jarbis", "Pas pour l'instant", "Pas pour le moment"],
                 action:function(i){
@@ -316,16 +316,16 @@ $(document).ready(function (){
                     }
                 }
             }
-			
+
             artyom.addCommands(commande);
-			
+
 
         }, 5000);
-		
+
 		setTimeout(function(){
             $('.bkgd-car').removeClass('wiggle');
         }, 7000);
-		
+
 	});
 
 
@@ -377,7 +377,7 @@ $(document).ready(function (){
             continuous:true,
             debug:true,
             listen:listenJarbis,
-            speed:1,
+            speed:1.20,
             mode:"normal"
         });
     };
